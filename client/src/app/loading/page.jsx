@@ -1,9 +1,9 @@
-import { LogIn } from "@/components";
+import { Loading } from "@/components";
 
 export default function Home() {
   return (
     <>
-      <LogIn />
+      <Loading />
     </>
   );
 }
