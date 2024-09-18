@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSyncincomen } from "fs";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
