@@ -6,3 +6,5 @@ export * from "./button";
 export * from "./background";
 export * from "./loading-daisy";
 export * from "./confirm";
+export * from "./logo";
+export * from "./input";

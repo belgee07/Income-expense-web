@@ -1,33 +1,26 @@
-import { readFileSync, writeFileSync } from "fs";
+import { readFile, writeFile } from "fs/promises";
 import bcrypt from "bcryptjs";
 
 export const signUpController = async (req, res) => {
   const { username, email, password } = req.body;
 
-  const resultJson = await readFileSync(
-    "/Users/24LP6422/Desktop/Full stack project/server/db/db.json",
-    "utf-8"
-  );
-  const result = JSON.parse(resultJson);
+  try {
+    const resultJson = await readFile("./db.json", "utf-8");
+    const result = JSON.parse(resultJson);
 
-  console.log(result);
+    const userFound = result.users.find((el) => el.username === username);
+    if (userFound) {
+      return res.status(400).send("User already exists.");
+    }
 
-  const hashedPassword = bcrypt.hashSync(password, 10);
-  console.log(hashedPassword);
+    const hashedPassword = await bcrypt.hash(password, 10);
+    result.users.push({ username, email, password: hashedPassword });
 
-  const userFound = result.users.find((el) => el.username === username);
+    await writeFile("./db.json", JSON.stringify(result, null, 2));
 
-  if (userFound) {
-    res.send("iim nertei hereglegch ali hedin burtguulsen bn");
-    return;
+    res.status(200).send("Signup success");
+  } catch (error) {
+    console.error("Error registering user:", error);
+    res.status(500).send("Internal server error.");
   }
-
-  result.users.push({ username, email, password: hashedPassword });
-
-  writeFileSync(
-    "/Users/24LP6422/Desktop/Full stack project/server/db/db.json",
-    JSON.stringify(result)
-  );
-
-  res.status(200).send("Signup success");
 };

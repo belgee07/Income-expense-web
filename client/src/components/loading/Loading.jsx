@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import LoadinDaisy from "../loading-daisy/LoadinDaisy";
+import { LoadinDaisy } from "@/components";
 
 export const Loading = () => {
   const router = useRouter();

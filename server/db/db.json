@@ -6,19 +6,24 @@
       "password": "$2a$10$HVU7gyzR8tzl2HhkWrSLEuuuAh7bOcJe/L9WdY816rjjAg1MfgbTS"
     },
     {
-      "username": "belgee7",
-      "email": "be",
-      "password": "$2a$10$9jeNKcQvuFW44rDyh/qTauOdd5Z.H6ht5CuJqKcw9fOhiSq6Pq8Gm"
-    },
-    {
-      "username": "norov",
-      "email": "noogii",
-      "password": "$2a$10$IOdxHWRMZbfB3j.RX0maGOVE31aHeM/ThWE0.yVUaD.Xr96vY4IbK"
-    },
-    {
       "username": "uzkhu",
       "email": "usuhu11@gmail.com",
       "password": "$2a$10$Fp16dpqAeapTPEGtwQVJu.VNRpnINvARfPwR82/LgXM6nL8savYsu"
+    },
+    {
+      "username": "gegeenee",
+      "email": "gegee.b@gmail.com",
+      "password": "$2a$10$IgXfmsMcu73ZlV45JPSyQOIEjPV84Th2EKCPmT5o4OWYYEz8B/ps."
+    },
+    {
+      "username": "amgaa",
+      "email": "amgaa1@gmail.com",
+      "password": "$2a$10$V00y43IK7JDlhmaxW0XaFeMcBo.gHkw1qN98hBcSxRAeSKEY6XJqW"
+    },
+    {
+      "username": "adsas",
+      "email": "qweqw",
+      "password": "$2a$10$fKPNHbFj8YxGNvB2B.RkMOXJ7hjSpGbO2ZL4lDGotxp/GB5vkHkXm"
     }
   ]
 }

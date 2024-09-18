@@ -1,32 +1,26 @@
-import { readFileSyncincomen } from "fs";
+import { readFileSync } from "fs";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
 export const loginController = async (req, res) => {
   const { email, password } = req.body;
-  const resultJson = readFileSync(
-    "/Users/24LP6422/Desktop/Full stack project/server/db/db.json",
-    "utf-8"
-  );
+  const resultJson = readFileSync("./db.json", "utf-8");
   const result = JSON.parse(resultJson);
-  const tokenSecret = "qwerty";
+  const tokenSecret = process.env.JWT_SECRET || "default_secret"; // Use environment variable
 
-  const emailFound = result.users.find((el) => el.email === email);
+  const user = result.users.find((el) => el.email === email);
 
-  if (!emailFound) {
-    res.status(400).send("ali neg ni taarahgui bn");
-    return;
+  if (!user) {
+    return res.status(400).send("Invalid email or password.");
   }
 
-  const passwordMatch = await bcrypt.compare(password, emailFound.password);
+  const passwordMatch = await bcrypt.compare(password, user.password);
 
   if (!passwordMatch) {
-    res.status(400).send("ali neg ni taarahgui bn");
-    return;
+    return res.status(400).send("Invalid email or password.");
   }
 
-  const token = jwt.sign({ email }, tokenSecret);
-  console.log(token);
+  const token = jwt.sign({ email }, tokenSecret, { expiresIn: "1h" }); // Added token expiration
 
-  res.status(200).send("login success");
+  res.status(200).json({ token }); // Return JWT token
 };

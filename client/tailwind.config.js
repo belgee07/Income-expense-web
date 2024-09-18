@@ -11,6 +11,9 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      borderRadius: {
+        "20px": "20px",
+      },
     },
   },
   plugins: [require("daisyui")],

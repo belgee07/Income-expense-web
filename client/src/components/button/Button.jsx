@@ -1,14 +1,12 @@
 import React from "react";
 
-const Button = ({ color, text, textColor, handleClick }) => {
+export const Button = ({ handleClick, color, textColor, text }) => {
   return (
     <button
       onClick={handleClick}
-      className={`btn w-full ${color} ${textColor} hover:bg-blue-700`}
+      className={`btn w-full rounded-20px  ${color} ${textColor} hover:bg-blue-700`}
     >
       {text}
     </button>
   );
 };
-
-export default Button;
