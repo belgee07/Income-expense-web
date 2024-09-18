@@ -3,29 +3,35 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Background from "../background/Background";
+import Button from "../button/Button";
+import { useRouter } from "next/navigation";
 
 export const LogIn = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  const { push } = useRouter();
+
   const handleLogin = async () => {
-    if (!username || !password) {
+    if (!email || !password) {
       setErrorMessage("Please fill in all fields.");
       return;
     }
 
     try {
       const response = await axios.post(
-        "http://100.10.10.243:9191/api/auth/token",
-        { username, password }
+        "http://localhost:8000/api/user/login",
+        { email, password }
       );
-      setSuccessMessage("Login successful!");
+
       console.log("Login successful:", response.data);
+      push("/loading");
     } catch (error) {
+      console.log(error);
       setErrorMessage("Invalid credentials. Please try again.");
-      console.error("Error logging in:", error);
     }
   };
 
@@ -48,10 +54,10 @@ export const LogIn = () => {
         <div className="flex flex-col gap-4 w-full max-w-[384px]">
           <input
             type="email"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="input input-bordered bg-white w-full"
+            className="input input-bordered rounded-lg bg-base-100 focus:outline-none w-full"
             aria-label="Email"
           />
           <input
@@ -59,17 +65,18 @@ export const LogIn = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className="input input-bordered bg-white w-full"
+            className="input input-bordered rounded-lg bg-base-100 focus:outline-none w-full"
             aria-label="Password"
           />
           {errorMessage && <p className="text-red-600">{errorMessage}</p>}
           {successMessage && <p className="text-green-600">{successMessage}</p>}
-          <button
-            onClick={handleLogin}
-            className="btn bg-blue-600 w-full text-white"
-          >
-            Log In
-          </button>
+
+          <Button
+            handleClick={handleLogin}
+            color={"bg-blue-600"}
+            text={"Log In"}
+            textColor={"text-white"}
+          />
         </div>
 
         <div className="flex gap-1">
@@ -80,7 +87,7 @@ export const LogIn = () => {
         </div>
       </div>
 
-      <div className="bg-blue-600 w-6/12 h-full"></div>
+      <Background />
     </div>
   );
 };

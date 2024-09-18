@@ -2,7 +2,9 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation"; // Updated import for Next.js 13+
+import { useRouter } from "next/navigation";
+import Background from "../background/Background";
+import Button from "../button/Button";
 
 export const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -11,7 +13,7 @@ export const SignUp = () => {
   const [rePassword, setRePassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter();
 
   const handleRegister = async () => {
     if (password !== rePassword) {
@@ -21,7 +23,7 @@ export const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://100.10.10.243:9191/api/auth/register",
+        "http://localhost:8000/api/user/signup",
         {
           username,
           password,
@@ -30,10 +32,9 @@ export const SignUp = () => {
       );
       alert("Registration successful!");
       console.log("Registration successful:", response.data);
-      router.push("/loading");
+      router.push("/login");
     } catch (error) {
       setErrorMessage("Registration failed. Please try again.");
-      console.error("Registration error:", error);
     }
   };
 
@@ -61,47 +62,49 @@ export const SignUp = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Name"
-            className="input input-bordered bg-white w-full"
+            className="input input-bordered rounded-lg bg-base-100 focus:outline-none w-full"
           />
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
-            className="input input-bordered bg-white w-full"
+            className="input input-bordered rounded-lg bg-base-100 focus:outline-none w-full"
           />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className="input input-bordered bg-white w-full"
+            className="input input-bordered rounded-lg bg-base-100 focus:outline-none w-full"
           />
           <input
             type="password"
             value={rePassword}
             onChange={(e) => setRePassword(e.target.value)}
             placeholder="Re-enter Password"
-            className="input input-bordered bg-white w-full"
+            className="input input-bordered rounded-lg bg-base-100 focus:outline-none  w-full"
           />
           {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-          <button
-            onClick={handleRegister}
-            className="btn bg-blue-600 w-full text-white"
-          >
-            Sign up
-          </button>
+
+          <Button
+            handleClick={handleRegister}
+            color={"bg-blue-600"}
+            text={"Sign Up"}
+            textColor={"text-white"}
+            hoverColor={"text-blue-600"}
+          />
         </div>
 
         <div className="flex gap-1">
           <p>Already have an account?</p>
-          <Link className="text-blue-600" href="/login">
+          <Link className="text-blue-600 hover:text-blue-700" href="/login">
             Log In
           </Link>
         </div>
       </div>
 
-      <div className="bg-blue-600 w-6/12 h-full"></div>
+      <Background />
     </div>
   );
 };
