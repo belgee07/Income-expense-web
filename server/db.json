@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "username": "tuguldur",
+      "email": "tuu12@gmail.com",
+      "password": "$2a$10$1c5Wnp5.ba3Z6jtAlB..huWvO/dQaHCT5LnV/yJ5DrD/9Wphq8pXm"
+    },
+    {
+      "username": "1",
+      "email": "1",
+      "password": "$2a$10$VFO4YSh03KXtJkbxMXEFM.Qum4g8Lel/ZMRq./SVbsNZfsMg4thk2"
+    },
+    {
+      "username": "gch",
+      "email": "hjv",
+      "password": "$2a$10$0GpDyv00Q3cANNwVYNLoB.bOJ/UgZjwLFanrmmSwdKjfexXRDaDxa"
+    },
+    {
+      "username": "asd",
+      "email": "asd",
+      "password": "$2a$10$qpaXf7HYcmxqvucObeDLJ.Pzw9ENURvHznSuktfZ65.LyXB7Njkt2"
+    }
+  ]
+}

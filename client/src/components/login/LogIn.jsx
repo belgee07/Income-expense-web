@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Logo, Background, Button, Input } from "@/components";
+import { userUser } from "@/provider/UserProvider";
 
 export const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -12,24 +12,18 @@ export const LogIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const { push } = useRouter();
+  const { handleLogin } = userUser();
 
-  const handleLogin = async () => {
+  const LoginButton = async () => {
     if (!email || !password) {
       setErrorMessage("Please fill in all fields.");
       return;
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/user/login",
-        { email, password }
-      );
+      await handleLogin(email, password);
 
-      // Assuming the response contains the JWT token
-      localStorage.setItem("token", response.data.token); // Store JWT token
-      console.log("Login successful:", response.data);
-
-      push("/dashboard"); // Redirect to a protected route
+      push("/confirm");
     } catch (error) {
       console.error("Login failed:", error);
       setErrorMessage("Invalid credentials. Please try again.");
@@ -74,7 +68,7 @@ export const LogIn = () => {
           {errorMessage && <p className="text-red-600">{errorMessage}</p>}
 
           <Button
-            handleClick={handleLogin}
+            handleClick={LoginButton}
             color={"bg-blue-600"}
             text={"Log In"}
             textColor={"text-white"}
