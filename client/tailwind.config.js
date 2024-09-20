@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         background: "var(--background)",
-        foreground: "var(--foreground)",
+        foreground: "#0166FF",
       },
       borderRadius: {
         "20px": "20px",

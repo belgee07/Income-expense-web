@@ -19,6 +19,11 @@
       "username": "asd",
       "email": "asd",
       "password": "$2a$10$qpaXf7HYcmxqvucObeDLJ.Pzw9ENURvHznSuktfZ65.LyXB7Njkt2"
+    },
+    {
+      "username": "123",
+      "email": "123",
+      "password": "$2a$10$WhE2d5YyX4hpmd.M5BHHoO1iab3Q7jipAvPOeVxHoyogikZztE/EW"
     }
   ]
 }

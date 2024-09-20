@@ -7,13 +7,16 @@ import { Logo, Background, Button, Input } from "@/components";
 import { userUser } from "@/provider/UserProvider";
 
 export const LogIn = () => {
+  const { push } = useRouter();
+  const { handleLogin, loggedIn } = userUser();
+
+  if (loggedIn) {
+    push("/confirm");
+  }
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  const { push } = useRouter();
-  const { handleLogin } = userUser();
-
   const LoginButton = async () => {
     if (!email || !password) {
       setErrorMessage("Please fill in all fields.");
@@ -22,7 +25,6 @@ export const LogIn = () => {
 
     try {
       await handleLogin(email, password);
-
       push("/confirm");
     } catch (error) {
       console.error("Login failed:", error);

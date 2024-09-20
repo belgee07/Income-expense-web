@@ -35,12 +35,12 @@ export const UserProvider = ({ children }) => {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
-      push("login");
+      push("/login");
     }
   });
 
   return (
-    <UserContext.Provider value={{ handleLogin }}>
+    <UserContext.Provider value={{ handleLogin, loggedIn }}>
       {children}
     </UserContext.Provider>
   );

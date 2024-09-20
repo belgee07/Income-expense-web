@@ -16,7 +16,7 @@ export const signUpController = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     result.users.push({ username, email, password: hashedPassword });
 
-    await writeFile("./db.json", JSON.stringify(result, null, 2));
+    await writeFile("./db.json", JSON.stringify(result));
 
     res.status(200).send("Signup success");
   } catch (error) {
