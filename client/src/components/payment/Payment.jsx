@@ -1,10 +1,33 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { Button, Logo } from "@/components";
 import { PiMoneyBold } from "react-icons/pi";
+import axios from "axios";
 
 export const Payment = ({ next }) => {
-  const handlerContinue = () => {
-    if (next) next();
+  const [currency, setCurrency] = useState("MNT - Mongolian Tugrik");
+
+  const currencyHandler = (e) => {
+    e.preventDefault();
+    setCurrency(e.target.value);
+  };
+
+  const handlerContinue = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axios.post(
+        "http://localhost:8000/api/confirm",
+        {
+          currency: currency,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+    } catch (error) {}
+
+    next();
   };
 
   return (
@@ -22,7 +45,10 @@ export const Payment = ({ next }) => {
           <PiMoneyBold className="bg-blue-600 text-white rounded-full w-12 h-12" />
           <p className="text-2xl">Select base currency</p>
 
-          <select className="select select-bordered w-full h-[64px] bg-base-100 focus:outline-none border-base-300 font-bold rounded-lg">
+          <select
+            onChange={currencyHandler}
+            className="select select-bordered w-full h-[64px] bg-base-100 focus:outline-none border-base-300 font-bold rounded-lg"
+          >
             <option>MNT - Mongolian Tugrik</option>
             <option>USD - USA Dollar</option>
           </select>
