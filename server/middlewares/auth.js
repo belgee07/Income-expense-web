@@ -21,7 +21,7 @@ export const authMidlleware = async (req, res, next) => {
 
       return;
     } else {
-      res.locals.email = suc.email;
+      res.locals.userId = suc.userId;
       next();
       return;
     }

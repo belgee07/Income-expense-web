@@ -12,7 +12,7 @@ export default function page() {
 
   const handlerContinue = () => {
     if (step === 2) {
-      router.push("/");
+      router.push("/dashboard");
       return;
     }
     setStep((prev) => prev + 1);

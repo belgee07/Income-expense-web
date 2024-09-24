@@ -4,7 +4,9 @@
       "userId": "fb6f04ae-9338-4228-a89c-6a7afe6ae741",
       "username": "1",
       "email": "1",
-      "password": "$2a$10$QzeN42dVxF44nEOWi0tSv./yKJvR2eGoO2.pArI0HhrkqIE4zH8lG"
+      "password": "$2a$10$QzeN42dVxF44nEOWi0tSv./yKJvR2eGoO2.pArI0HhrkqIE4zH8lG",
+      "currency": "MNT - Mongolian Tugrik",
+      "balance": "11"
     }
   ]
 }
