@@ -10,3 +10,7 @@ export * from "./input";
 export * from "./payment";
 export * from "./cash";
 export * from "./goodjob";
+export * from "./dashboard";
+export * from "./chip";
+export * from "./balance";
+export * from "./chart";

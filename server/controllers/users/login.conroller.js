@@ -1,33 +1,35 @@
-import { readFileSync } from "fs";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { DbPath } from "../../utils/constants.js";
+import { sql } from "../../database/index.js";
 
 export const loginController = async (req, res) => {
   const { email, password } = req.body;
 
-  const resultJson = readFileSync(DbPath, "utf-8");
-  const result = JSON.parse(resultJson);
+  try {
+    const [foundUser] = await sql`SELECT * FROM users WHERE email = ${email}`;
 
-  const foundUser = result.users.find((el) => el.email === email);
-  if (!foundUser) {
-    return res.status(400).send("Invalid email or password.");
+    if (!foundUser) {
+      return res.status(400).json({ error: "Invalid email or password." });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, foundUser.password);
+    if (!passwordMatch) {
+      return res.status(400).json({ error: "Invalid email or password." });
+    }
+
+    const tokenSecret = process.env.SECRET;
+    if (!tokenSecret) {
+      return res.status(500).json({ error: "Token secret is not defined." });
+    }
+
+    const token = jwt.sign({ userId: foundUser.userid }, tokenSecret, {
+      expiresIn: "1h",
+    });
+
+    // Send the response with the token
+    res.status(200).json({ message: "Successfully logged in", token: token });
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ error: "Internal server error." });
   }
-
-  const passwordMatch = await bcrypt.compare(password, foundUser.password);
-  if (!passwordMatch) {
-    return res.status(400).send("Invalid email or password.");
-  }
-
-  const tokenSecret = process.env.SECRET;
-
-  if (!tokenSecret) {
-    return res.status(500).send("Token secret is not defined.");
-  }
-
-  const token = jwt.sign({ userId: foundUser.userId }, tokenSecret, {
-    expiresIn: "1h",
-  });
-
-  res.status(200).json({ token });
 };

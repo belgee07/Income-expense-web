@@ -1,3 +1,5 @@
+import { Loading } from "@/components";
+
 export default function Home() {
-  return <div>aaa</div>;
+  return <div>aa</div>;
 }

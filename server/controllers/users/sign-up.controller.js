@@ -1,25 +1,17 @@
-import { readFile, writeFile } from "fs/promises";
-import bcrypt from "bcryptjs";
+import hash from "bcryptjs";
 import { v4 as uuid } from "uuid";
-import { DbPath } from "../../utils/constants.js";
+import { sql } from "../../database/index.js";
 
 export const signUpController = async (req, res) => {
   const { username, email, password } = req.body;
-  const userId = uuid();
 
   try {
-    const resultJson = await readFile(DbPath, "utf-8");
-    const result = JSON.parse(resultJson);
+    const createdAt = new Date();
+    const userId = uuid();
+    const hashedPassword = await hash.hashSync(password);
 
-    const userFound = result.users.find((el) => el.username === username);
-    if (userFound) {
-      return res.status(400).send("User already exists.");
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    result.users.push({ userId, username, email, password: hashedPassword });
-
-    await writeFile(DbPath, JSON.stringify(result));
+    await sql`INSERT INTO users(userId, username, email, password, createdAt)
+              VALUES (${userId},${username}, ${email}, ${hashedPassword}, ${createdAt})`;
 
     res.status(200).send("Signup success");
   } catch (error) {

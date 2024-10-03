@@ -1,12 +1,1 @@
-{
-  "users": [
-    {
-      "userId": "fb6f04ae-9338-4228-a89c-6a7afe6ae741",
-      "username": "1",
-      "email": "1",
-      "password": "$2a$10$QzeN42dVxF44nEOWi0tSv./yKJvR2eGoO2.pArI0HhrkqIE4zH8lG",
-      "currency": "MNT - Mongolian Tugrik",
-      "balance": "11"
-    }
-  ]
-}
+{"users":[{"userId":"bc40fcd9-2f56-434c-8e4f-0de71a48d16b","username":"11","email":"11","password":"$2a$10$xpZXly6FnmeSJr5ve6PTz.lJSq0umMMCfG/YQ/hFuF1dpMYi1pomu","createdAt":"2024-09-25T02:31:26.093Z","updatedAt":"2024-09-25T02:31:26.093Z","currency":"MNT - Mongolian Tugrik","balance":"12344"}],"expense":[],"income":[]}
