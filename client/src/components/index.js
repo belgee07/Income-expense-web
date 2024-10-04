@@ -14,3 +14,5 @@ export * from "./dashboard";
 export * from "./chip";
 export * from "./balance";
 export * from "./chart";
+export * from "./last-record";
+export * from "./records-left";
